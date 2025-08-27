@@ -1,0 +1,38 @@
+:root {
+  --primary-color: #4B5EFF;
+  --accent-color: #FF6F61;
+  --background-color: #F3F6FF;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--background-color);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.login-container {
+  text-align: center;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+}
+
+.app-title {
+  color: var(--primary-color);
+  margin: 1rem 0;
+  font-size: 2rem;
+}
+
+.g_id_signin {
+  margin-top: 1rem;
+}
