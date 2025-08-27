@@ -1,0 +1,88 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--background-color);
+  margin: 0;
+  padding: 2rem;
+  display: block;
+}
+
+.settings-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+  color: var(--primary-color);
+  margin-top: 0;
+  text-align: center;
+}
+
+.section {
+  margin-bottom: 1.5rem;
+}
+
+.calendars-list .calendar-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.calendar-item input[type="radio"] {
+  margin-right: 0.5rem;
+}
+
+.events-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+}
+
+.events-list div {
+  margin-bottom: 0.5rem;
+}
+
+button {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.skeleton {
+  background: #e0e0e0;
+  border-radius: 4px;
+  animation: pulse 1.5s infinite;
+}
+
+.skeleton.line {
+  height: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton.input {
+  height: 2rem;
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
