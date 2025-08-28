@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Harangle - Sign in</title>
+  <link rel="icon" type="image/svg+xml" href="assets/harangle-icon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <main class="login-container">
+    <img src="assets/harangle-icon.svg" class="logo" alt="Harangle logo" />
+    <h1 class="app-title">Harangle</h1>
+  <div id="g_id_onload"
+        data-client_id="YOUR_GOOGLE_CLIENT_ID"
+        data-context="signin"
+        data-ux_mode="popup"
+        data-callback="handleCredentialResponse">
+  </div>
+  <div class="g_id_signin" data-type="standard" data-size="large"></div>
+  <button id="mock-signin-button" class="mock-signin hidden">Mock Sign In</button>
+</main>
+<script>
+  function handleCredentialResponse(response) {
+    // Placeholder for handling ID token response.
+    console.log('Google ID token:', response.credential);
+  }
+
+  window.addEventListener('load', () => {
+    if (typeof google === 'undefined') {
+      const mockBtn = document.getElementById('mock-signin-button');
+      mockBtn.classList.remove('hidden');
+      mockBtn.addEventListener('click', () => {
+        console.log('Mock sign-in');
+        window.location.href = 'settings.html';
+      });
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Harangle - Settings</title>
+  <link rel="icon" type="image/svg+xml" href="assets/harangle-icon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="settings.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <script defer src="settings.js"></script>
+</head>
+<body>
+  <main class="settings-container">
+    <h1 class="page-title">Settings</h1>
+
+    <section class="section username-section">
+      <label for="username-input">Username</label>
+      <div id="username-skeleton" class="skeleton input"></div>
+      <input id="username-input" type="text" class="hidden" />
+    </section>
+
+    <section class="section calendars-section">
+      <h2>Calendars</h2>
+      <div id="calendars-list" class="calendars-list">
+        <div class="skeleton line"></div>
+        <div class="skeleton line"></div>
+      </div>
+    </section>
+
+    <section class="section events-section">
+      <h2>Events</h2>
+      <div id="events-list" class="events-list">
+        <div class="skeleton line"></div>
+        <div class="skeleton line"></div>
+        <div class="skeleton line"></div>
+      </div>
+    </section>
+
+    <div class="buttons">
+      <button id="cancel-button" class="btn-cancel">Cancel</button>
+      <button id="save-button" class="btn-save" disabled>Save</button>
+    </div>
+  </main>
+</body>
+</html>
