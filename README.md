@@ -5,3 +5,4 @@ This repository contains prototypes for Harangle's login, group list, settings, 
 - Open `index.html` in a browser to view the login page. If the Google sign-in script is unavailable, a mock button allows you to proceed to the groups page.
 - Open `groups.html` to browse existing groups or create a new one. Selecting a group opens `calendar.html` with that group's ID.
 - Open `settings.html` to edit your username, choose calendars, and review events.
+- Open `calendar.html` directly to view the current month's mock schedule and click days to inspect how many hours a user is busy.
