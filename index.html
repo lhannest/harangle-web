@@ -25,6 +25,7 @@
   function handleCredentialResponse(response) {
     // Placeholder for handling ID token response.
     console.log('Google ID token:', response.credential);
+    window.location.href = 'groups.html';
   }
 
   window.addEventListener('load', () => {
@@ -33,7 +34,7 @@
       mockBtn.classList.remove('hidden');
       mockBtn.addEventListener('click', () => {
         console.log('Mock sign-in');
-        window.location.href = 'settings.html';
+        window.location.href = 'groups.html';
       });
     }
   });
