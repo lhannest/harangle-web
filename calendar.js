@@ -1,3 +1,5 @@
+let calendar;
+
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const groupId = params.get('groupId');
@@ -17,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const busy = generateBusyData(year, month);
   const calendarEl = document.getElementById('calendar');
 
-  const calendar = new FullCalendar.Calendar(calendarEl, {
+  calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     headerToolbar: false,
     dateClick(infoClick) {
@@ -57,5 +59,8 @@ function showDetails(dateStr, hours, user) {
   const detail = document.getElementById('day-detail');
   detail.innerHTML = `<h3>${dateStr}</h3><p>${user.name} (ID: ${user.id}) is busy for ${hours} hours.</p>`;
   detail.classList.add('active');
+  if (calendar) {
+    calendar.updateSize();
+  }
 }
 
