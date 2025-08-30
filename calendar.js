@@ -46,9 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
     dayCellDidMount(arg) {
       const dateStr = arg.date.toISOString().slice(0, 10);
       const hours = busy[dateStr] || 0;
-      const dot = document.createElement('span');
-      dot.className = `busy-dot ${colorClass(hours)}`;
-      arg.el.appendChild(dot);
+      const cls = colorClass(hours);
+      if (cls) {
+        const dot = document.createElement('span');
+        dot.className = `busy-dot ${cls}`;
+        arg.el.appendChild(dot);
+      }
     },
   });
   calendar.render();
@@ -67,10 +70,7 @@ function generateBusyData(year, month) {
 }
 
 function colorClass(hours) {
-  if (hours >= 9) return 'busy-high';
-  if (hours >= 5) return 'busy-medium';
-  if (hours >= 1) return 'busy-low';
-  return 'free';
+  return hours <= 4 ? 'busy-good' : '';
 }
 
 function showDetails(dateStr, hours, user) {
