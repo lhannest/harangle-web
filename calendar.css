@@ -72,24 +72,35 @@ body {
   background: var(--accent-color);
 }
 
-.fc-daygrid-day.bright {
-  background: #4caf50;
-  color: #fff;
+
+/* busy level indicator */
+.fc-daygrid-day {
+  position: relative;
 }
 
-.fc-daygrid-day.medium {
-  background: #81c784;
-  color: #fff;
+.busy-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
 }
 
-.fc-daygrid-day.dull {
-  background: #c8e6c9;
-  color: #2e7d32;
+.busy-high {
+  background: #d32f2f;
 }
 
-.fc-daygrid-day.tan {
-  background: #e6d5b8;
-  color: #5d4037;
+.busy-medium {
+  background: #fbc02d;
+}
+
+.busy-low {
+  background: #388e3c;
+}
+
+.free {
+  background: #9e9e9e;
 }
 
 .fc-daygrid-day.selected {
