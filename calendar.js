@@ -21,7 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
-    headerToolbar: false,
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay',
+    },
     dateClick(infoClick) {
       const dateStr = infoClick.dateStr;
       const hours = busy[dateStr] || 0;

@@ -47,6 +47,26 @@ body {
   --fc-border-color: #e0e0e0;
 }
 
+.fc .fc-toolbar.fc-header-toolbar {
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+}
+
+.fc .fc-toolbar-title {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.fc .fc-button-primary {
+  background: var(--primary-color);
+  border: none;
+  text-transform: capitalize;
+}
+
+.fc .fc-button-primary:not(:disabled):hover {
+  background: var(--accent-color);
+}
+
 .fc-daygrid-day.bright {
   background: #4caf50;
   color: #fff;
