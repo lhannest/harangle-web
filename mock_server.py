@@ -1,5 +1,5 @@
 import json
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import SimpleHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
 from calendar import monthrange
 import random, datetime
@@ -28,7 +28,7 @@ GROUPS = [
     {"id": "group-2", "name": "Friends"}
 ]
 
-class Handler(BaseHTTPRequestHandler):
+class Handler(SimpleHTTPRequestHandler):
     def _set_headers(self):
         self.send_response(200)
         self.send_header('Content-Type', 'application/json')
@@ -83,7 +83,7 @@ class Handler(BaseHTTPRequestHandler):
             self._set_headers()
             self.wfile.write(json.dumps(data).encode())
         else:
-            self.send_error(404)
+            super().do_GET()
 
     def do_POST(self):
         parsed = urlparse(self.path)
