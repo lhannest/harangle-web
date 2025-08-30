@@ -61,8 +61,19 @@ function colorClass(hours) {
 
 function showDetails(dateStr, hours, user) {
   const detail = document.getElementById('day-detail');
-  detail.innerHTML = `<h3>${dateStr}</h3><p>${user.name} (ID: ${user.id}) is busy for ${hours} hours.</p>`;
+  detail.innerHTML = `
+    <button class="close-detail" aria-label="Close">&times;</button>
+    <h3>${dateStr}</h3>
+    <p>${user.name} (ID: ${user.id}) is busy for ${hours} hours.</p>
+  `;
   detail.classList.add('active');
+  detail.querySelector('.close-detail').addEventListener('click', () => {
+    detail.classList.remove('active');
+    detail.innerHTML = '';
+    if (calendar) {
+      calendar.updateSize();
+    }
+  });
   if (calendar) {
     calendar.updateSize();
   }
