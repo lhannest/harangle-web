@@ -26,6 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay',
     },
+    customButtons: {
+      today: {
+        text: 'Today',
+        click() {
+          calendar.today();
+          const dateStr = new Date().toISOString().slice(0, 10);
+          const hours = busy[dateStr] || 0;
+          showDetails(dateStr, hours, user);
+        },
+      },
+    },
     dateClick(infoClick) {
       const dateStr = infoClick.dateStr;
       const hours = busy[dateStr] || 0;
@@ -40,6 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   });
   calendar.render();
+  const todayStr = today.toISOString().slice(0, 10);
+  showDetails(todayStr, busy[todayStr] || 0, user);
 });
 
 function generateBusyData(year, month) {
