@@ -1,7 +1,7 @@
 let calendar;
 let selectedCell;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const groupId = params.get('groupId');
   const info = document.getElementById('group-info');
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     year: 'numeric',
   });
 
-  const busy = generateBusyData(year, month);
+  const busy = await fetchBusyData(groupId, year, month);
   const calendarEl = document.getElementById('calendar');
 
   calendar = new FullCalendar.Calendar(calendarEl, {
@@ -59,14 +59,11 @@ document.addEventListener('DOMContentLoaded', () => {
   showDetails(todayStr, busy[todayStr] || 0, user);
 });
 
-function generateBusyData(year, month) {
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const data = {};
-  for (let d = 1; d <= daysInMonth; d++) {
-    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-    data[dateStr] = Math.floor(Math.random() * 13);
-  }
-  return data;
+function fetchBusyData(groupId, year, month) {
+  const monthStr = `${year}-${String(month + 1).padStart(2, '0')}`;
+  return fetch(`http://localhost:8000/api/groups/${encodeURIComponent(groupId)}/busy?month=${monthStr}`)
+    .then(res => res.json())
+    .catch(() => ({}));
 }
 
 function colorClass(hours) {

@@ -9,49 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
   let selectedCalendars = new Set();
 
   function fetchUser() {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve({ username: 'HarangleUser', calendars: ['cal-1', 'cal-2'] });
-      }, 800);
-    });
+    return fetch('http://localhost:8000/api/user')
+      .then(res => res.json())
+      .catch(() => ({ username: '', calendars: [] }));
   }
 
   function fetchCalendars() {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve([
-          { id: 'cal-1', name: 'Work' },
-          { id: 'cal-2', name: 'Personal' },
-          { id: 'cal-3', name: 'Holidays' }
-        ]);
-      }, 1000);
-    });
+    return fetch('http://localhost:8000/api/calendars')
+      .then(res => res.json())
+      .catch(() => []);
   }
 
-  const eventData = {
-    'cal-1': [
-      { id: 'e1', name: 'Team Meeting' },
-      { id: 'e2', name: 'Project Review' }
-    ],
-    'cal-2': [
-      { id: 'e3', name: 'Dentist Appointment' },
-      { id: 'e4', name: 'Gym Session' }
-    ],
-    'cal-3': [
-      { id: 'e5', name: 'Independence Day' }
-    ]
-  };
-
   function fetchEvents(ids) {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        let events = [];
-        ids.forEach(id => {
-          events = events.concat(eventData[id] || []);
-        });
-        resolve(events);
-      }, 700);
-    });
+    const query = ids.length ? `?ids=${ids.join(',')}` : '';
+    return fetch(`http://localhost:8000/api/events${query}`)
+      .then(res => res.json())
+      .catch(() => []);
   }
 
   function renderCalendars(calendars, userCalendarIds) {
@@ -111,8 +84,14 @@ document.addEventListener('DOMContentLoaded', () => {
       username: usernameInput.value,
       calendars: Array.from(selectedCalendars)
     };
-    console.log('Saved settings', payload);
-    saveButton.disabled = true;
+    fetch('http://localhost:8000/api/user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(() => {
+      console.log('Saved settings', payload);
+      saveButton.disabled = true;
+    });
   });
 
   cancelButton.addEventListener('click', () => {

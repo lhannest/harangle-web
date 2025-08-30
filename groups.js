@@ -5,14 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let groups = [];
 
   function fetchGroups() {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve([
-          { id: 'group-1', name: 'Family' },
-          { id: 'group-2', name: 'Friends' }
-        ]);
-      }, 800);
-    });
+    return fetch('http://localhost:8000/api/groups')
+      .then(res => res.json())
+      .catch(() => []);
   }
 
   function renderGroups() {
@@ -32,8 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = prompt('Enter group name:');
     if (name) {
       const id = 'group-' + Date.now();
-      groups.push({ id, name });
-      renderGroups();
+      fetch('http://localhost:8000/api/groups', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, name })
+      }).then(() => {
+        fetchGroups().then(data => {
+          groups = data;
+          renderGroups();
+        });
+      });
     }
   });
 

@@ -1,8 +1,12 @@
 # Harangle Web
 
-This repository contains prototypes for Harangle's login, group list, settings, and calendar pages. All pages rely on mocked data so they can be opened directly in a browser without running a server.
+This repository contains prototypes for Harangle's login, group list, settings, and calendar pages. A lightweight mock backend (`mock_server.py`) now supplies data to each page.
 
-- Open `index.html` in a browser to view the login page. If the Google sign-in script is unavailable, a mock button allows you to proceed to the groups page.
-- Open `groups.html` to browse existing groups or create a new one. Selecting a group opens `calendar.html` with that group's ID.
-- Open `settings.html` to edit your username, choose calendars, and review events.
-- Open `calendar.html` directly to view the current month's mock schedule powered by FullCalendar and click days to inspect how many hours a user is busy.
+## Running
+
+1. Start the mock server: `python mock_server.py` (listens on `http://localhost:8000`).
+2. Open the pages directly in a browser:
+   - `index.html` shows the login with a fallback mock sign-in button.
+   - `groups.html` lists groups fetched from the backend and links to `calendar.html` with the selected group.
+   - `settings.html` lets you edit your username, choose calendars, and review events from the server.
+   - `calendar.html` displays the current month via FullCalendar and loads busy-hour data for the chosen group.
