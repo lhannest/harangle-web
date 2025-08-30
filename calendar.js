@@ -2,11 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const groupId = params.get('groupId');
   const info = document.getElementById('group-info');
-  if (groupId) {
-    info.textContent = `Group ID: ${groupId}`;
-  } else {
-    info.textContent = 'No group selected.';
-  }
+  info.textContent = groupId ? `Group ID: ${groupId}` : 'No group selected.';
 
   const user = { id: 'u1', name: 'Mock User' };
   const today = new Date();
@@ -19,31 +15,25 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const busy = generateBusyData(year, month);
-  const grid = document.getElementById('calendar-grid');
+  const calendarEl = document.getElementById('calendar');
 
-  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  dayNames.forEach((name) => {
-    const dn = document.createElement('div');
-    dn.textContent = name;
-    dn.className = 'day-name';
-    grid.appendChild(dn);
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    headerToolbar: false,
+    dateClick(infoClick) {
+      const dateStr = infoClick.dateStr;
+      const hours = busy[dateStr] || 0;
+      showDetails(dateStr, hours, user);
+    },
+    dayCellDidMount(arg) {
+      const dateStr = arg.date.toISOString().slice(0, 10);
+      const hours = busy[dateStr];
+      if (hours !== undefined) {
+        arg.el.classList.add(colorClass(hours));
+      }
+    },
   });
-
-  const firstDay = new Date(year, month, 1).getDay();
-  for (let i = 0; i < firstDay; i++) {
-    grid.appendChild(document.createElement('div'));
-  }
-
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  for (let day = 1; day <= daysInMonth; day++) {
-    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    const hours = busy[dateStr];
-    const cell = document.createElement('div');
-    cell.textContent = day;
-    cell.className = `day ${colorClass(hours)}`;
-    cell.addEventListener('click', () => showDetails(dateStr, hours, user));
-    grid.appendChild(cell);
-  }
+  calendar.render();
 });
 
 function generateBusyData(year, month) {
