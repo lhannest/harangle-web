@@ -92,6 +92,10 @@ body {
   color: #5d4037;
 }
 
+.fc-daygrid-day.selected {
+  box-shadow: inset 0 0 0 3px var(--accent-color);
+}
+
 .day-detail {
   flex: 1;
   background: #fff;

@@ -1,4 +1,5 @@
 let calendar;
+let selectedCell;
 
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
@@ -73,6 +74,7 @@ function colorClass(hours) {
 }
 
 function showDetails(dateStr, hours, user) {
+  selectDay(dateStr);
   const detail = document.getElementById('day-detail');
   detail.innerHTML = `
     <button class="close-detail" aria-label="Close">&times;</button>
@@ -89,6 +91,17 @@ function showDetails(dateStr, hours, user) {
   });
   if (calendar) {
     calendar.updateSize();
+  }
+}
+
+function selectDay(dateStr) {
+  if (selectedCell) {
+    selectedCell.classList.remove('selected');
+  }
+  const cell = document.querySelector(`[data-date="${dateStr}"]`);
+  if (cell) {
+    cell.classList.add('selected');
+    selectedCell = cell;
   }
 }
 
