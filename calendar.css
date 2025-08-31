@@ -64,24 +64,13 @@ body {
 }
 
 
-/* busy level indicator */
+/* highlight for good availability */
 .fc-daygrid-day {
   position: relative;
 }
 
-.busy-dot {
-  position: absolute;
-  bottom: 4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  z-index: 2;
-}
-
-.busy-good {
-  background: #388e3c;
+.fc-daygrid-day.good-day {
+  background: #c8e6c9;
 }
 
 .fc-daygrid-day.selected {

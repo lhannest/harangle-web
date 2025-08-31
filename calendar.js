@@ -44,9 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const total = dayBusy ? Object.values(dayBusy).reduce((a, b) => a + b, 0) : 0;
       const cls = colorClass(total);
       if (cls) {
-        const dot = document.createElement('span');
-        dot.className = `busy-dot ${cls}`;
-        arg.el.appendChild(dot);
+        arg.el.classList.add(cls);
       }
     },
   });
@@ -63,7 +61,7 @@ function fetchBusyData(groupId, year, month) {
 }
 
 function colorClass(hours) {
-  return hours <= 4 ? 'busy-good' : '';
+  return hours <= 4 ? 'good-day' : '';
 }
 
 function showDetails(dateStr, dayBusy) {
