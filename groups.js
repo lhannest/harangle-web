@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
       div.className = 'group-item';
       div.textContent = group.name;
       div.addEventListener('click', () => {
-        window.location.href = `calendar.html?groupId=${encodeURIComponent(group.id)}`;
+        window.location.href = `calendar.html?groupId=${encodeURIComponent(group.id)}&groupName=${encodeURIComponent(group.name)}`;
       });
       groupsList.appendChild(div);
     });

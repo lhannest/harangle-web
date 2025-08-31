@@ -20,13 +20,15 @@ EVENTS = {
         {"id": "e4", "name": "Gym Session"}
     ],
     "cal-3": [
-        {"id": "e5", "name": "Independence Day"}
+    {"id": "e5", "name": "Independence Day"}
     ]
 }
 GROUPS = [
     {"id": "group-1", "name": "Family"},
     {"id": "group-2", "name": "Friends"}
 ]
+
+USERS = ["Jack", "Catherine", "Rob", "Elisa", "Marcus", "Sophie"]
 
 class Handler(SimpleHTTPRequestHandler):
     def _set_headers(self):
@@ -79,7 +81,7 @@ class Handler(SimpleHTTPRequestHandler):
             data = {}
             for d in range(1, days + 1):
                 date_str = f"{year:04d}-{month:02d}-{d:02d}"
-                data[date_str] = random.randint(0, 12)
+                data[date_str] = {name: random.randint(0, 12) for name in USERS}
             self._set_headers()
             self.wfile.write(json.dumps(data).encode())
         else:

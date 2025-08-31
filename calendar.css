@@ -21,15 +21,6 @@ body {
   text-align: center;
 }
 
-.group-info {
-  text-align: center;
-}
-
-.month-year {
-  text-align: center;
-  margin: 0.5rem 0 1rem;
-}
-
 .calendar-wrapper {
   display: flex;
   flex-direction: column;
@@ -115,6 +106,15 @@ body {
 .day-detail h3 {
   margin-top: 0;
   color: var(--primary-color);
+}
+
+.day-detail ul {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+.day-detail li {
+  margin: 0.25rem 0;
 }
 
 .close-detail {
