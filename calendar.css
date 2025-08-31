@@ -71,6 +71,8 @@ body {
 
 .fc-daygrid-day.good-day {
   background: #c8e6c9;
+  box-shadow: inset 0 0 0 3px #fff;
+  border-radius: 4px;
 }
 
 .fc-daygrid-day.selected {
