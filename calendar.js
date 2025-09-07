@@ -54,9 +54,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function fetchBusyData(groupId, year, month) {
-  const monthStr = `${year}-${String(month + 1).padStart(2, '0')}`;
-  return fetch(`http://localhost:8000/api/groups/${encodeURIComponent(groupId)}/busy?month=${monthStr}`)
+  const base = 'http://localhost:8000/days/busy';
+  const url = groupId ? `${base}?groupId=${encodeURIComponent(groupId)}` : base;
+  return fetch(url)
     .then(res => res.json())
+    .then((rows) => {
+      const byDay = {};
+      rows.forEach(({ name, busy }) => {
+        Object.entries(busy).forEach(([date, hrs]) => {
+          const d = new Date(date);
+          if (d.getFullYear() === year && d.getMonth() === month) {
+            if (!byDay[date]) byDay[date] = {};
+            byDay[date][name] = hrs;
+          }
+        });
+      });
+      return byDay;
+    })
     .catch(() => ({}));
 }
 

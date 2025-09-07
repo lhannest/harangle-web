@@ -84,6 +84,18 @@ class Handler(SimpleHTTPRequestHandler):
                 data[date_str] = {name: random.randint(0, 12) for name in USERS}
             self._set_headers()
             self.wfile.write(json.dumps(data).encode())
+        elif parsed.path == '/days/busy':
+            today = datetime.date.today()
+            days = monthrange(today.year, today.month)[1]
+            result = []
+            for name in USERS:
+                busy = {}
+                for d in range(1, days + 1):
+                    date_str = f"{today.year:04d}-{today.month:02d}-{d:02d}"
+                    busy[date_str] = random.randint(0, 12)
+                result.append({"name": name, "busy": busy})
+            self._set_headers()
+            self.wfile.write(json.dumps(result).encode())
         else:
             super().do_GET()
 
